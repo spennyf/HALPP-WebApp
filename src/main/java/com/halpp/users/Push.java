@@ -90,9 +90,8 @@ public class Push extends HttpServlet {
 				if (userArnSet.next()) {
 					userArn = userArnSet.getString("ENDPOINT_ARN");
 				}
-				System.out.println("93userArn: " + userArn);
 				
-				BasicAWSCredentials creds = new BasicAWSCredentials("AKIAJLWTZHG3MDHYQPVQ", "bcqkijfdjTn2s6wTAS1sFuWhgVRT9788hC0Ajwsk"); 
+				BasicAWSCredentials creds = new BasicAWSCredentials("***", "***"); 
 				AmazonSNS client = AmazonSNSClientBuilder.standard()
 					.withCredentials(new AWSStaticCredentialsProvider(creds))
 					.withRegion(Regions.US_EAST_1).build(); 
@@ -124,7 +123,6 @@ public class Push extends HttpServlet {
 						createReq.setToken(registrationId);
 						CreatePlatformEndpointResult createRes = client.createPlatformEndpoint(createReq);
 						userArn = createRes.getEndpointArn();
-						System.out.println("126userArn: " + userArn);
 					}
 				} else {
 					CreatePlatformEndpointRequest createReq = new CreatePlatformEndpointRequest();
@@ -137,7 +135,6 @@ public class Push extends HttpServlet {
 					createReq.setToken(registrationId);
 					CreatePlatformEndpointResult createRes = client.createPlatformEndpoint(createReq);
 					userArn = createRes.getEndpointArn();
-					System.out.println("139userArn: " + userArn);
 				}
 				
 				PreparedStatement insertAbstinenceLog = con.prepareStatement("UPDATE HALPP.USERS"
